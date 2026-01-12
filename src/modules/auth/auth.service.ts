@@ -9,6 +9,8 @@ export const register = async (data: any) => {
 
 export const login = async (email: string, password: string) => {
   const user = await User.findOne({ email });
+  console.log(user);
+  
   if (!user || !(await comparePassword(password, user.password)))
     throw new Error("Credenciales inválidas");
   return signToken({ id: user._id, role: user.role });
